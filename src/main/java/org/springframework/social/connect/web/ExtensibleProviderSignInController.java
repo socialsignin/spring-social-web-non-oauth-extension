@@ -34,7 +34,9 @@ import org.springframework.web.servlet.view.RedirectView;
 * Modified version of ProviderSignInController which can be subclassed
 * so as to allow use of non-OAuth1 and OAuth2 Providers (eg. Last.fm) whose 
 * authentication dance is similar to OAuth but has some differences.
-* ProviderSignInController itself has restriction of either OAuth1 or OAuth2
+* 
+* ProviderSignInController itself has restriction of either OAuth1 or OAuth2 and does not
+* allow required methods to be overriden to alter this behaviour
 * 
 * TODO - Fork ProviderSignInController in spring-social-web
 * 
@@ -83,6 +85,8 @@ public class ExtensibleProviderSignInController extends
 		super.setPostSignInUrl(postSignInUrl);
 		this.postSignInUrl = postSignInUrl;
 	}
+	 
+	
 
 	protected RedirectView handleSignIn(Connection<?> connection, NativeWebRequest request) {
 		List<String> userIds = usersConnectionRepository.findUserIdsWithConnection(connection);
